@@ -2,7 +2,7 @@
 require_once('database.php');
 
 // Get all categories
-$query = 'SELECT * FROM categories
+$query = 'SELECT * FROM categories_guitar1
                        ORDER BY categoryID';
 $statement = $db->prepare($query);
 $statement->execute();
@@ -28,9 +28,15 @@ $statement->closeCursor();
             <th>Name</th>
             <th>&nbsp;</th>
         </tr>
-        
-        <!-- add code for the rest of the table here -->
-    
+     <?php foreach ($categories as $category) : ?>
+     <tr>
+     <td>
+    <form action="delete_category.php" method="post">
+    <input type="Hidden" name="category_id" value="<?php echo $category=['categoryID']; ?>"/>
+    <input type="submit" value="Delete"/>
+    </form>
+    </td>
+    </tr>
     </table>
 
     <h2>Add Category</h2>
